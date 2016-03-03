@@ -20,6 +20,8 @@
 
 #include "Vex_Competition_Includes.c"   //Main competition background code...do not modify!
 
+//PID variables setup
+
 #define PID_SENSOR_INDEX   QUAD
 #define PID_SENSOR_SCALE   1
 
@@ -82,6 +84,10 @@ void pre_auton()
 
 task autonomous()
 {
+
+		// .....................................................................................
+  	// Insert user code here.
+  	// .....................................................................................
 	motor[L1] = 128;
 	motor[L2] = -128;					//Launcher command set
 	motor[L3] = 128;
@@ -130,9 +136,7 @@ task autonomous()
 		motor[L] = -128;
 		motor[RL] = 128;
 	}
-  // .....................................................................................
-  // Insert user code here.
-  // .....................................................................................
+
 
 } // end of autonomous
 
@@ -149,6 +153,8 @@ task usercontrol()
 {
 	// User control code here, inside the loop
 
+//Create Variables
+
 	int channel3 = 0;
 	int channel2 = 0;
 	bool button7up = false;
@@ -162,7 +168,10 @@ task usercontrol()
 	bool button8right = false;
 	bool button8left = false;
 	int speed = 0;
-	//int counter = 0;
+	bool button5up = false;
+	bool button5down = false;
+
+	//int counter = 0;  //depreciated
 	bool upPressed = false;
 	bool downPressed = false;
 	launchencode1 = 0;
@@ -182,6 +191,9 @@ task usercontrol()
 		button8down = (vexRT[Btn8D]==true);
 		button8right = (vexRT[Btn8R]==true);
 		button8left = (vexRT[Btn8L]==true);
+		button5up = (vexRT[Btn5U]==true);
+		button5down = (vexRT[Btn5D]==true);
+
 // Permanently leaves LCD backlight on
 		bLCDBacklight = true;
 
@@ -200,11 +212,11 @@ task usercontrol()
 	motor[BL] = vexRT[Ch3];
 	motor[BR] = -vexRT[Ch2];
 // Launcher speed change toggles, first 2 old/unused
-			if (vexRT[Btn7R]== true)
+			if (button7right== true)
 		{
 			toggle = true;
 		}
-		else if (vexRT[Btn7L] == true)
+		else if (button7left == true)
 		{
 			toggle = false;
 		}
@@ -311,11 +323,11 @@ task usercontrol()
  				motor[L3] = motor_trigger;
  				motor[L4] = -motor_trigger;
 // Chain drive code
-		if (vexRT[Btn5U] == true)
+		if (button5up == true)
 		{
 			motor[RL] = 127;
 		}
-		else if (vexRT[Btn8U] == true)
+		else if (button8up == true)
 		{
 			motor[RL] = -127;
 		}
@@ -324,11 +336,11 @@ task usercontrol()
 			motor[RL] = 0;
 }
 // Belt drive code
-		if (vexRT[Btn5D] == true)
+		if (button5down == true)
 		{
 			motor[L] = -127;
 		}
-		else if (vexRT[Btn8L] == true)
+		else if (button8left == true)
 		{
 			motor[L] = 127;
 		}
