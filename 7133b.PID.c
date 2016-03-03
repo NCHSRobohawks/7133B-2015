@@ -35,9 +35,9 @@
 // These could be constants but leaving
 // as variables allows them to be modified in the debugger "live"
 
-float  pid_Kp = 2;
-float  pid_Ki = 0.04;
-float  pid_Kd = 1;
+float  pid_Kp = 4;
+float  pid_Ki = 1;
+float  pid_Kd = 2;
 
 static int   pidRunning = 1;
 static float pidRequestedValue;
@@ -247,7 +247,7 @@ task usercontrol()
 			}
 			if(button8down==true)
 			{
-				pidRequestedValue = -200;
+				pidRequestedValue = -220;
 			}
 
 		wait1Msec(10);
