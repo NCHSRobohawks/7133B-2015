@@ -20,6 +20,8 @@
 
 #include "Vex_Competition_Includes.c"   //Main competition background code...do not modify!
 
+//PID variables setup
+
 #define PID_SENSOR_INDEX   QUAD
 #define PID_SENSOR_SCALE   -1
 
@@ -82,6 +84,9 @@ void pre_auton()
 
 task autonomous()
 {
+	// .....................................................................................
+  	// Insert user code here.
+  	// .....................................................................................
 	motor[L1] = 128;
 	motor[L2] = -128;					//Launcher command set
 	motor[L3] = 128;
@@ -130,9 +135,7 @@ task autonomous()
 		motor[L] = -128;
 		motor[RL] = 128;
 	}
-  // .....................................................................................
-  // Insert user code here.
-  // .....................................................................................
+  
 
 } // end of autonomous
 
@@ -148,7 +151,8 @@ task autonomous()
 task usercontrol()
 {
 	// User control code here, inside the loop
-
+	
+	//Create Variables
 	int channel3 = 0;
 	int channel2 = 0;
 	bool button7up = false;
@@ -162,7 +166,7 @@ task usercontrol()
 	bool button8right = false;
 	bool button8left = false;
 	int speed = 0;
-	//int counter = 0;
+	//int counter = 0; //depreciated
 	bool upPressed = false;
 	bool downPressed = false;
 	launchencode1 = 0;
@@ -186,7 +190,7 @@ task usercontrol()
 		bLCDBacklight = true;
 
 		bool toggle = false;
-				if (vexRT[Btn8D] == true)
+		if (vexRT[Btn8D] == true)
 		{
 			motor[L] = 127;
 		}
@@ -200,7 +204,7 @@ task usercontrol()
 	motor[BL] = vexRT[Ch3];
 	motor[BR] = -vexRT[Ch2];
 // Launcher speed change toggles, first 2 old/unused
-			if (vexRT[Btn7R]== true)
+		if (vexRT[Btn7R]== true)
 		{
 			toggle = true;
 		}
@@ -208,7 +212,7 @@ task usercontrol()
 		{
 			toggle = false;
 		}
-			if (button6up==true)
+		if (button6up==true)
 			{
 				upPressed = true;
 			}
@@ -243,7 +247,7 @@ task usercontrol()
 			// pid
 		launchencode1 = SensorValue[ QUAD ];
 		launchencodefixed = launchencode1 - launchencode2;
-    launchencode2 = launchencode1;
+    		launchencode2 = launchencode1;
 
   		if( SensorType[ launchencodefixed ] == sensorQuadEncoder )
         	SensorValue[ launchencodefixed ] = 0;
@@ -338,15 +342,15 @@ task usercontrol()
 		}
 if (lcdtrigger >= 6)
 {
-// LCD/Battery Info
-string mainBattery, backupBattery;
-clearLCDLine(0);                                            // Clear line 1 (0) of the LCD
-clearLCDLine(1);                                            // Clear line 2 (1) of the LCD
-//Display the Primary Robot battery voltage
-displayLCDString(0, 0, "Primary: ");
-sprintf(mainBattery, "%1.2f%c", nImmediateBatteryLevel/1000.0,'V'); //Build the value to be displayed
-displayNextLCDString(mainBattery);
-displayLCDString(1, 0, "ROBOHAWKS 7133B");
+	// LCD/Battery Info
+	string mainBattery, backupBattery;
+	clearLCDLine(0);                                            // Clear line 1 (0) of the LCD
+	clearLCDLine(1);                                            // Clear line 2 (1) of the LCD
+	//Display the Primary Robot battery voltage
+	displayLCDString(0, 0, "Primary: ");
+	sprintf(mainBattery, "%1.2f%c", nImmediateBatteryLevel/1000.0,'V'); //Build the value to be displayed
+	displayNextLCDString(mainBattery);
+	displayLCDString(1, 0, "ROBOHAWKS 7133B");
 }
 else
 {
