@@ -88,6 +88,8 @@ task autonomous()
 		// .....................................................................................
   	// Insert user code here.
   	// .....................................................................................
+delay(2000);
+{
 	motor[L1] = 128;
 	motor[L2] = -128;					//Launcher command set
 	motor[L3] = 128;
@@ -96,7 +98,8 @@ task autonomous()
 	motor[FR] = -120;					//Drive Wheel command set
 	motor[BR] = -120;
 	motor[BL] = 127;
- 	delay(4300);					//Timer
+}
+ 	delay(4700);					//Timer
  	{
  		motor[L] = -128;					//Loader Command set
 		motor[RL] = 128;
@@ -111,7 +114,7 @@ task autonomous()
 		motor[L] = 0;
 		motor[RL] = 0;
 	}
-		delay(700);
+		delay(900);
 	{
 		motor[L] = -128;
 		motor[RL] = 128;
@@ -131,7 +134,7 @@ task autonomous()
 		motor[L] = 0;
 		motor[RL] = 0;
 	}
-		delay(700);
+		delay(1100);
 	{
 		motor[L] = -128;
 		motor[RL] = 128;
@@ -247,7 +250,7 @@ task usercontrol()
 			}
 			if(button8down==true)
 			{
-				pidRequestedValue = -220;
+				pidRequestedValue = -175;
 			}
 
 		wait1Msec(10);
