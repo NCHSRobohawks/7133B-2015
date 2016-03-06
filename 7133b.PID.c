@@ -353,15 +353,15 @@ task usercontrol()
 		}
 if (lcdtrigger >= 6)
 {
-// LCD/Battery Info
-string mainBattery, backupBattery;
-clearLCDLine(0);                                            // Clear line 1 (0) of the LCD
-clearLCDLine(1);                                            // Clear line 2 (1) of the LCD
-//Display the Primary Robot battery voltage
-displayLCDString(0, 0, "Primary: ");
-sprintf(mainBattery, "%1.2f%c", nImmediateBatteryLevel/1000.0,'V'); //Build the value to be displayed
-displayNextLCDString(mainBattery);
-displayLCDString(1, 0, "ROBOHAWKS 7133B");
+	// LCD/Battery Info
+	string mainBattery, backupBattery;
+	clearLCDLine(0);                                            // Clear line 1 (0) of the LCD
+	clearLCDLine(1);                                            // Clear line 2 (1) of the LCD
+	//Display the Primary Robot battery voltage
+	displayLCDString(0, 0, "Primary: ");
+	sprintf(mainBattery, "%1.2f%c", nImmediateBatteryLevel/1000.0,'V'); //Build the value to be displayed
+	displayNextLCDString(mainBattery);
+	displayLCDString(1, 0, "ROBOHAWKS 7133B");
 }
 else
 {
