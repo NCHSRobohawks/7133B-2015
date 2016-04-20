@@ -54,6 +54,54 @@ float  launchencode1;
 float  launchencode2;
 float  launchencodefixed;
 float  lcdtrigger;
+
+int totalTurns;
+int leftTurns;
+int rightTurns;
+int leftTPS;
+int rightTPS;
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+//
+//                          Custom Functions
+//
+//
+/////////////////////////////////////////////////////////////////////////////////////////
+void driveForward()
+{		
+		
+		int speed = 127;
+		
+		motor[FL] = speed;
+	  motor[FR] = speed;					
+	  motor[BR] = speed;
+	  motor[BL] = speed;
+
+
+}
+void stopDriving()
+{
+		motor[FL] = 0;
+	  motor[FR] = 0;					
+	  motor[BR] = 0;
+	  motor[BL] = 0;
+
+
+}
+void driveForward(int turns)
+{
+	driveForward();
+	
+	
+
+
+}
+
+
+
+
 /////////////////////////////////////////////////////////////////////////////////////////
 //
 //                          Pre-Autonomous Functions
@@ -369,4 +417,6 @@ else
 }
 wait1Msec(20);
 }
+
+
 }
