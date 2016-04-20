@@ -54,6 +54,95 @@ float  launchencode1;
 float  launchencode2;
 float  launchencodefixed;
 float  lcdtrigger;
+
+int turnsNeeded;
+int totalTurns;
+int leftTurns;
+int rightTurns;
+int leftTPS;
+int rightTPS;
+bool turnsCompleted;
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+//
+//                          Custom Functions
+//
+//
+/////////////////////////////////////////////////////////////////////////////////////////
+void driveForward()
+{		
+		
+		int speed = 127;
+		
+		motor[FL] = speed;
+	  motor[FR] = speed;					
+	  motor[BR] = speed;
+	  motor[BL] = speed;
+
+
+}
+void stopDriving()
+{
+		motor[FL] = 0;
+	  motor[FR] = 0;					
+	  motor[BR] = 0;
+	  motor[BL] = 0;
+
+
+}
+void driveForward(int turns)
+{
+	driveForward();
+	
+	
+
+
+}
+void checkSync()
+
+{
+	leftTurns = SensorValue[leftEncoder];
+	rightTurns = SensorValue[rightEncoder];
+	if ((leftTurns - rightTurns)<100&&(leftTurns - rightTurns)>0)
+	{
+		
+		motor[FL] = speed;
+	  motor[FR] = speed;					
+	  motor[BR] = speed;
+	  motor[BL] = speed;
+	
+	
+	}
+	if ((rightTurns - leftTurns)<100&&(rightTurns - leftTurns)>0)
+	{
+		
+	
+	}
+void syncMotors()
+
+{
+if ((leftTurns - rightTurns)<100&&(leftTurns - rightTurns)>0)
+	{
+		
+		motor[FL] = 127-(leftTurns - rightTurns);
+	 // motor[FR] = speed;					
+	  //motor[BR] = speed;
+	  motor[BL] = 127-(leftTurns - rightTurns);
+	
+	
+	}
+	if ((rightTurns - leftTurns)<100&&(rightTurns - leftTurns)>0)
+	{
+		
+	
+	}
+}
+
+
+
+
 /////////////////////////////////////////////////////////////////////////////////////////
 //
 //                          Pre-Autonomous Functions
@@ -84,11 +173,29 @@ void pre_auton()
 
 task autonomous()
 {
+	
+	driveForward;
+	turnsNeeded = 1000;
+	if (sensor == triggered)
+	{
+		stopDriving();
+	}
+	else
+	{
+		checkSync();
+		if (turnsCompleted)
+		{
+			stopDriving();
+		}
+	}
+	
+	
+}
 
 		// .....................................................................................
   	// Insert user code here.
   	// .....................................................................................
-delay(2000);
+/*delay(2000);
 {
 	motor[L1] = 128;
 	motor[L2] = -128;					//Launcher command set
@@ -140,7 +247,7 @@ delay(2000);
 		motor[RL] = 128;
 	}
 
-
+*/
 } // end of autonomous
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -369,4 +476,6 @@ else
 }
 wait1Msec(20);
 }
+
+
 }
