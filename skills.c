@@ -50,6 +50,20 @@ while(1==1){
 			motor[LeftLift1] = -127;
 			motor[LeftLift2] = -127;
 		}
+			//Lift go up
+		else if(VexRT[Btn7U]){
+			motor[RightLift1] = 127;
+			motor[RightLift2] = 127;
+			motor[LeftLift1] = 127;
+			motor[LeftLift2] = 127;
+		}
+		//Lift go down
+		else if (VexRT[Btn7D]){
+			motor[RightLift1] = -127;
+			motor[RightLift2] = -127;
+			motor[LeftLift1] = -127;
+			motor[LeftLift2] = -127;
+		}
 		//Do nothing (run off)
 		else{
 			motor[RightLift1] = 0;
@@ -59,11 +73,11 @@ while(1==1){
 		}
 
 		//Opens claw
-		if(VexRT[Btn5U] && sensorValue(claw) < 750){
+		if(VexRT[Btn8D] && sensorValue(claw) < 750){
 			motor[claw] = -127;
     	motor[claw2] = -127;
 		}
-		else if(VexRT[Btn8D]){
+		else if(VexRT[Btn5U]){
 			motor[claw] = -127;
     	motor[claw2] = -127;
 		}
